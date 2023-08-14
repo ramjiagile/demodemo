@@ -18,6 +18,8 @@ folder_name="$1"
 # get the migration folder path from the input
 
 MIGRATION_FOLDER="$CURRENT_DIR/$folder_name"
+
+echo "$MIGRATION_FOLDER"
 exit 1
 
 # get the basename of the migration folder
