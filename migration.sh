@@ -37,7 +37,7 @@ create_migration_table() {
         echo "Table migration created successfully."
     else
         echo "Error creating table migration."
-    firef_type
+    fi
 }
 
 # Call the function to create the "migration" table
