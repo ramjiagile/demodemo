@@ -6,6 +6,12 @@ DB_USER="$DB_USER"
 DB_PASS="$DB_PASS"
 DB_NAME="$DB_NAME"
 
+echo "$DB_HOST"
+echo "$DB_USER"
+echo "$DB_PASS"
+echo "$DB_NAME"
+
+exit 1
 # current directory path
 CURRENT_DIR=$(pwd)
 # get the migration folder path from the input
