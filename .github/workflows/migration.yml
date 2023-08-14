@@ -38,10 +38,7 @@ jobs:
           echo "DB_NAME=$DB_NAME" >> $secrets.DB_NAME
 
       - name: Make shell script executable
-        run: |
-          pwd
-          ls -la
-          chmod +x migration.sh
+        run: chmod +x migration.sh
       
       - name: Run shell script
         run: |
