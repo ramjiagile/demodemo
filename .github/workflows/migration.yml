@@ -35,7 +35,13 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_NAME: ${{ secrets.DB_NAME }}
-        run: |
-          sudo apt-get install -y mariadb-client
+        run: |   
+          sudo apt-get update
+          sudo apt-get install apt-transport-https curl -y
+          sudo mkdir -p /etc/apt/keyrings
+          sudo curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+          sudo apt-get update
+          sudo apt-get install mariadb-server -y
+          sudo systemctl restart mariadb
           chmod +x migration.sh
           ./migration.sh ${{ github.event.inputs.folder }}
