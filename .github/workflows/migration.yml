@@ -12,25 +12,35 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+    inputs:
+      folder:
+        description: 'path to folder'
+        required: true
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    environment: '${{ github.ref_name }}' # This is the environment name
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # get database credentials from secrets
+      - name: Get database credentials
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo "Branch name: ${{ github.ref_name }}"
+          echo "DB_HOST=$DB_HOST" >> $secrets.DB_HOST
+          echo "DB_USER=$DB_USER" >> $secrets.DB_USER
+          echo "DB_PASS=$DB_PASS" >> $secrets.DB_PASS
+          echo "DB_NAME=$DB_NAME" >> $secrets.DB_NAME
+
+      - name: Make shell script executable
+        run: |
+          chmod +x ./migrate.sh
+      
+      - name: Run shell script
+        run: |
+          ./migrate.sh ${{ github.event.inputs.folder }}
