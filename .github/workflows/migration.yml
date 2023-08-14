@@ -41,7 +41,7 @@ jobs:
         run: |
           pwd
           ls -la
-          chmod +x ./migration.sh
+          chmod +x migration.sh
       
       - name: Run shell script
         run: |
