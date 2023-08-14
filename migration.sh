@@ -11,7 +11,6 @@ echo "$DB_USER"
 echo "$DB_PASS"
 echo "$DB_NAME"
 
-exit 1
 # current directory path
 CURRENT_DIR=$(pwd)
 # get the migration folder path from the input
@@ -19,6 +18,7 @@ folder_name="$1"
 # get the migration folder path from the input
 
 MIGRATION_FOLDER="$CURRENT_DIR/$folder_name"
+exit 1
 
 # get the basename of the migration folder
 MIGRATION_FOLDER_BASENAME=$(basename "$MIGRATION_FOLDER")
