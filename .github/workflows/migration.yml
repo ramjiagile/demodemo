@@ -39,6 +39,8 @@ jobs:
 
       - name: Make shell script executable
         run: |
+          pwd
+          ls -la
           chmod +x ./migrate.sh
       
       - name: Run shell script
