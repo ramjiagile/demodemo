@@ -6,9 +6,13 @@ DB_USER="$DB_USER"
 DB_PASS="$DB_PASS"
 DB_NAME="$DB_NAME"
 
-
+# current directory path
+CURRENT_DIR=$(pwd)
 # get the migration folder path from the input
-MIGRATION_FOLDER=$1
+folder_name="$1"
+# get the migration folder path from the input
+
+MIGRATION_FOLDER="$CURRENT_DIR/$folder_name"
 
 # get the basename of the migration folder
 MIGRATION_FOLDER_BASENAME=$(basename "$MIGRATION_FOLDER")
