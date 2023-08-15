@@ -26,22 +26,41 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
+      - name: get environment secrets
+        id: env
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          
+      - name: Display Secrets
+        run: |
+          echo ${{ env.DB_HOST }}
+          echo ${{ env.DB_USER }}
+          echo ${{ env.DB_PASSWORD }}
+          echo ${{ env.DB_NAME }}
+          echo ${{ env.DB_PORT }}
+
+          
       # get database credentials from secrets
-      - name: Get database credentials
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-        run: |   
-          sudo apt-get update
-          sudo apt-get install apt-transport-https curl -y
-          sudo mkdir -p /etc/apt/keyrings
-          sudo curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
-          sudo apt-get update
-          sudo apt-get install mariadb-server -y
-          sudo systemctl restart mariadb
-          chmod +x migration.sh
-          ./migration.sh ${{ github.event.inputs.folder }}
+      # - name: Get database credentials
+      #   env:
+      #     DB_HOST: ${{ secrets.DB_HOST }}
+      #     DB_USER: ${{ secrets.DB_USER }}
+      #     DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      #     DB_NAME: ${{ secrets.DB_NAME }}
+      #   run: |   
+          # sudo apt-get update
+          # sudo apt-get install apt-transport-https curl -y
+          # sudo mkdir -p /etc/apt/keyrings
+          # sudo curl -o /etc/apt/keyrings/mariadb-keyring.pgp 'https://mariadb.org/mariadb_release_signing_key.pgp'
+          # sudo apt-get update
+          # sudo apt-get install mariadb-server -y
+          # sudo systemctl restart mariadb
+          # chmod +x migration.sh
+          # ./migration.sh ${{ github.event.inputs.folder }}
