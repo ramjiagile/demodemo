@@ -27,7 +27,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: get environment secrets
         id: env
@@ -40,13 +40,12 @@ jobs:
           
       - name: Display Secrets
         run: |
-          echo ${{ env.DB_HOST }}
-          echo ${{ env.DB_USER }}
-          echo ${{ env.DB_PASSWORD }}
-          echo ${{ env.DB_NAME }}
-          echo ${{ env.DB_PORT }}
+          echo "DB_HOST=$DB_HOST"
+          echo "DB_USER=$DB_USER"
+          echo "DB_PASSWORD=$DB_PASSWORD"
+          echo "DB_NAME=$DB_NAME"
 
-          
+
       # get database credentials from secrets
       # - name: Get database credentials
       #   env:
