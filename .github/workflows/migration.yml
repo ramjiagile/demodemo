@@ -32,9 +32,9 @@ jobs:
       - name: get environment secrets
         id: env
         run: |
-          cat <<'EOL' >> .env
-            DATABASE_URL = "mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
-            LOGIN_DATABASE_URL= "mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
+          mkdir -p sampledemo && cat <<'EOL' >> sampledemo/.env
+          DATABASE_URL="mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
+          LOGIN_DATABASE_URL="mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
           EOL
           ls -la
           cat .env
@@ -43,7 +43,11 @@ jobs:
           # echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           # echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
           # echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
-          
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: release-apk
+          path: sampledemo/
       # - name: Display Secrets
       #   run: |
       #     echo "DB_HOST=$DB_HOST"
