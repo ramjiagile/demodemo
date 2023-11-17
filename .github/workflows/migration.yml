@@ -32,11 +32,16 @@ jobs:
       - name: get environment secrets
         id: env
         run: |
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
-          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          cat <<'EOL' >> .env
+            DATABASE_URL = "mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
+            LOGIN_DATABASE_URL= "mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
+          EOL
+          ls -la
+          # echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          # echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          # echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          # echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          # echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
           
       - name: Display Secrets
         run: |
