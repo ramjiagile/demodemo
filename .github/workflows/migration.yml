@@ -12,10 +12,10 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    inputs:
-      folder:
-        description: 'path to folder'
-        required: true
+    # inputs:
+    #   folder:
+    #     description: 'path to folder'
+    #     required: true
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -37,18 +37,19 @@ jobs:
             LOGIN_DATABASE_URL= "mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
           EOL
           ls -la
+          cat .env
           # echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
           # echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
           # echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           # echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
           # echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
           
-      - name: Display Secrets
-        run: |
-          echo "DB_HOST=$DB_HOST"
-          echo "DB_USER=$DB_USER"
-          echo "DB_PASSWORD=$DB_PASSWORD"
-          echo "DB_NAME=$DB_NAME"
+      # - name: Display Secrets
+      #   run: |
+      #     echo "DB_HOST=$DB_HOST"
+      #     echo "DB_USER=$DB_USER"
+      #     echo "DB_PASSWORD=$DB_PASSWORD"
+      #     echo "DB_NAME=$DB_NAME"
 
 
       # get database credentials from secrets
