@@ -35,8 +35,7 @@ jobs:
           mkdir sampledemo
           cd sampledemo
           cat <<'EOL' >> .env
-          DATABASE_URL="mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
-          LOGIN_DATABASE_URL="mysql+pymysql://agilecyber:T03rnK9Y2023$@3.110.246.242:3306/user?charset=utf8"
+          ${{ secrets.MYENV }}
           EOL
           ls -la
           cat .env
