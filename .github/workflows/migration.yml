@@ -32,6 +32,9 @@ jobs:
           run: |
            ls -la
            pwd
+           cd
+           ls -la
+           pwd
       # - name: get environment secrets
       #   id: env
       #   run: |
