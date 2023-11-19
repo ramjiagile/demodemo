@@ -26,29 +26,32 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: get environment secrets
-        id: env
-        run: |
-          mkdir sampledemo
-          cd sampledemo
-          cat <<'EOL' >> .env
-          ${{ secrets.MYENV }}
-          EOL
-          ls -la
-          cat .env
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
+        - name: check
+          run: |
+           ls -la
+           pwd
+      # - name: get environment secrets
+      #   id: env
+      #   run: |
+      #     mkdir sampledemo
+      #     cd sampledemo
+      #     cat <<'EOL' >> .env
+      #     ${{ secrets.MYENV }}
+      #     EOL
+      #     ls -la
+      #     cat .env
           # echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
           # echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
           # echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           # echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
           # echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: .env
-          path: sampledemo/
+      # - name: Upload a Build Artifact
+      #   uses: actions/upload-artifact@v3.1.0
+      #   with:
+      #     name: .env
+      #     path: sampledemo/
       # - name: Display Secrets
       #   run: |
       #     echo "DB_HOST=$DB_HOST"
